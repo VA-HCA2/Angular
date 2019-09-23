@@ -1,0 +1,64 @@
+<div class="container">
+  <h1>{{title}}</h1>
+
+  <div class="container">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" placeholder="Enter Name" required autofocus
+        [(ngModel)]="firstName" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" required
+        [(ngModel)]="lastName" />
+    </div>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="email" />
+    </div>
+    <!-- Property Binding: [ ] -->
+    <button type="button" class="btn btn-primary" [disabled]="addNewMountains" (click)="onAddUser()">Add User </button>
+    &nbsp;<button type="button" class="btn btn-secondary" (click)="onReset()">Clear</button>
+  </div>
+  <div class="container" id="mountainsDiv">
+    <hr />
+    <!-- Built-in ngStyle attribute directive: uses Property Binding [ ] to bind to a property of the directive -->
+    <h3 [ngStyle]="{color: getColor()}">Users</h3>
+    <div *ngIf="newUserAdded; else noUsers">
+      <!--
+        String Interpolation: Whatever is evaluated in the TypeScript expression inside the String Interpolation braces {{ }} resolves to a String.
+        {{ TypeScript_Expression }} => result is a String
+      -->
+      <!-- Built-in *ngFor directive -->
+
+      <!--<p *ngFor="let user of users">{{user}}</p> -->
+
+      <table class="table table-dark table-hover table-striped">
+        <thead class="thead-light">
+          <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+    <!-- Create ng-template with local reference (#) to conditinally display -->
+    <ng-template #noUsers>No Users Added.</ng-template>
+  </div>
+
+  <div class="container">
+    <hr />
+    <!-- Even though currentYear is defined as type number in app.component.ts, it resolves to a string -->
+    <footer class="pull-right">&copy; {{getCurrentYear()}}</footer>
+  </div>
+</div>
